@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rate a Movie</title>
+<style>
+  body { 
+    font-family: Arial; 
+    background-color: #121212; 
+    color: #fff; 
+    padding: 50px; 
+  }
+  form { 
+    background-color: #1e1e1e; 
+    padding: 30px; 
+    border-radius: 15px; 
+    max-width: 400px; 
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  input, select { 
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    font-size: 1rem; 
+    border: none; 
+    border-radius: 5px;
+  }
+  input:focus, select:focus { outline: none; }
+  button { 
+    width: 100%; 
+    padding: 12px; 
+    font-size: 1.2rem; 
+    background-color: #ffcc00; 
+    color: #000; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: 0.3s;
+  }
+  button:hover { background-color: #ffaa00; }
+  .message { 
+    text-align: center; 
+    color: #00ff00; 
+    margin-bottom: 20px; 
+    font-size: 1.2rem; 
+  }
+  h2 { text-align:center; margin-bottom: 30px; }
+  a.back { 
+    display:block; 
+    text-align:center; 
+    margin-top: 20px; 
+    color: #fff; 
+    text-decoration: none; 
+    font-size: 1.2rem;
+  }
+  a.back:hover { color: #ffcc00; }
+</style>
+</head>
+<body>
+
+<h2>Rate a Movie 🎬</h2>
+
+{% if message %}
+  <div class="message">{{ message }}</div>
+{% endif %}
+
+<form method="POST">
+  <label>User ID:</label>
+  <input type="text" name="user" placeholder="Enter your user ID" required>
+
+  <label>Movie:</label>
+  <select name="movie" required>
+    {% for movie in movies %}
+      <option value="{{ movie.MovieID }}">{{ movie.Title }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Rating (1-5):</label>
+  <input type="number" name="rating" min="1" max="5" step="0.5" required>
+
+  <button type="submit">Submit Rating</button>
+</form>
+
+<a href="/" class="back">⬅ Back to Home</a>
+
+</body>
+</html>
